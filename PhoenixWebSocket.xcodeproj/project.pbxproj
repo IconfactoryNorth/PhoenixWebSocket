@@ -111,6 +111,7 @@
 				TargetAttributes = {
 					B6FA23A81C63661400AF0893 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -263,6 +264,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.almassapargali.PhoenixWebSocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -284,6 +286,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.almassapargali.PhoenixWebSocket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
