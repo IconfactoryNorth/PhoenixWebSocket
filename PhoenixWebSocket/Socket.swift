@@ -73,7 +73,7 @@ public final class Socket {
     public var enableLogging: Bool = true
     
     public var onConnect: (() -> ())?
-    public var onDisconnect: ((NSError?) -> ())?
+    public var onDisconnect: ((Error?) -> ())?
     
     // ref as key, for triggering callback when phx_reply event comes in
     fileprivate var sentMessages = [String: MessageCallback]()
@@ -238,8 +238,22 @@ public final class Socket {
 }
 
 extension Socket: WebSocketDelegate {
-    public func websocketDidConnect(socket: Starscream.WebSocket) {
-        log("Connected to:", socket.currentURL)
+
+//    func didReceive(event: WebSocketEvent, client: WebSocket) {
+//    	switch(event) {
+//    		case .connected(let properties):
+//    			websocketDidConnect(socket: client, properties: properties)
+//			case .disconnected(let str, let num):
+//				websocketDidDisconnect(socket: client, error: nil)
+//			case .text(let message):
+//				websocketDidReceiveMessage(socket: client, text: message)
+//			case .binary(let data):
+//				websocketDidReceiveData(socket: client, data: data)
+//		}
+//	}
+
+    public func websocketDidConnect(socket: WebSocketClient) {
+        log("Connected")
         onConnect?()
         heartbeatTimer?.invalidate()
         heartbeatTimer = Timer.scheduledTimer(timeInterval: 30,
@@ -248,8 +262,8 @@ extension Socket: WebSocketDelegate {
         channels.forEach(sendJoinEvent)
     }
     
-    public func websocketDidDisconnect(socket: Starscream.WebSocket, error: NSError?) {
-        log("Disconnected from:", socket.currentURL, error)
+    public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        log("Disconnected:", error)
         // we don't worry about reconnecting, since we've started reconnectTime when connecting
         onDisconnect?(error)
         heartbeatTimer?.invalidate()
@@ -265,7 +279,7 @@ extension Socket: WebSocketDelegate {
         sentMessages.removeAll()
     }
     
-    public func websocketDidReceiveMessage(socket: Starscream.WebSocket, text: String) {
+    public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         guard let data = text.data(using: String.Encoding.utf8), let message = Message(data: data)
             else { log("Couldn't parse message from text:", text); return }
         
@@ -287,7 +301,7 @@ extension Socket: WebSocketDelegate {
             .forEach { $0.recieved(message) }
     }
     
-    public func websocketDidReceiveData(socket: Starscream.WebSocket, data: Data) {
+    public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
         log("Received data:", data)
     }
 }

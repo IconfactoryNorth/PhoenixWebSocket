@@ -70,7 +70,7 @@ public class Channel {
         case joinFailed(SendError)
         
         /// Disconnected from server, contains error if any.
-        case disconnected(NSError?)
+        case disconnected(Error?)
         
         func isJoined() -> Bool {
             switch self {

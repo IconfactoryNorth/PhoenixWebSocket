@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PhoenixWebSocket'
-  s.version          = '0.6.1'
-  s.summary          = 'Port to cocoapods'
+  s.version          = '1.0.0'
+  s.summary          = 'Port to cocoapods by Modern Logic'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -28,10 +28,10 @@ Swift framework for working with websockets on Phoenix
   s.source           = { :git => 'git@github.com:IconfactoryNorth/PhoenixWebSocket.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.2'
 
   s.source_files = ['PhoenixWebSocket/*.h', 'PhoenixWebSocket/*.swift']
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
   
   # s.resource_bundles = {
   #   'PhoenixWebSocket' => ['PhoenixWebSocket/Assets/*.png']
@@ -39,5 +39,5 @@ Swift framework for working with websockets on Phoenix
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'Starscream', '~> 2.1.0'
+  s.dependency 'Starscream', '~> 3.1.1'
 end
